@@ -6,15 +6,22 @@ on:
         branches: [main]
 jobs:
     build:
+        env:
+            CI: true
+        strategy:
+            matrix:
+                node-version: [14.x, 16.x, 20.x]
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - name: Use Node.js version 16
+            - name: Use Node.js version ${{ matrix.node-version }}
               uses: actions/setup-node@v2
               with:
-                  node-version: "16"
+                  node-version: ${{ matrix.node-version }}
             - name: Install dependencies
               run: yarn
             - name: Build
               run: yarn build
+            - name: Test
+              run: yarn test
