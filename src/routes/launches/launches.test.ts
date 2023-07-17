@@ -1,11 +1,13 @@
 import request from "supertest";
 import app from "../../app";
 import { mongoConnect, mongoDisconnect } from "../../../src/services/mongo";
+import { loadPlanetData } from "../../../src/models/planets.model";
 
 describe("Launches API", () => {
     // beforeAll will connect to the DB before the tust start running
     beforeAll(async () => {
         await mongoConnect();
+        await loadPlanetData();
     });
 
     afterAll(async () => {

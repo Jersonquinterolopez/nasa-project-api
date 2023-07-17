@@ -29,7 +29,5 @@ jobs:
               run: yarn
             - name: Build
               run: yarn build
-            - name: Run server
-               run: yarn dev
             - name: Test
               run: yarn test
